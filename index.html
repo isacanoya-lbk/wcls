@@ -87,23 +87,21 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .intro-wcls-sub{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:3px;color:rgba(255,255,255,.7);opacity:0;animation:iFadeIn .4s ease 2.4s forwards;}
 @keyframes iLetterPop{from{opacity:0;transform:scale(.5) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
 
-/* LOCK */
-#lockScreen{position:fixed;inset:0;z-index:100;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;}
-.lock-logo{font-size:52px;margin-bottom:10px;animation:floatLogo 3s ease-in-out infinite;}
+/* LOGIN SCREEN */
+#loginScreen{position:fixed;inset:0;z-index:100;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;}
+.login-logo{font-size:52px;margin-bottom:10px;animation:floatLogo 3s ease-in-out infinite;}
 @keyframes floatLogo{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
-.lock-title{font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:3px;color:var(--b1);text-transform:uppercase;margin-bottom:3px;text-align:center;text-shadow:0 0 14px var(--b2);}
-.lock-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:3px;margin-bottom:40px;}
-.pin-display{display:flex;gap:12px;margin-bottom:32px;}
-.pin-char{width:44px;height:52px;background:var(--surface);border:2px solid var(--border2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;font-size:24px;color:var(--b1);text-shadow:0 0 10px var(--b2);transition:border-color .2s,box-shadow .2s;}
-.pin-char.filled{border-color:var(--b1);box-shadow:0 0 14px rgba(37,99,235,.25);}
-.pin-char.error{border-color:var(--red)!important;color:var(--red)!important;text-shadow:0 0 12px var(--red)!important;box-shadow:0 0 14px rgba(239,68,68,.3)!important;animation:shake .35s ease;}
-@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:280px;}
-.key{background:var(--surface);border:1.5px solid var(--border2);border-radius:12px;height:58px;display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;font-size:18px;color:var(--b1);cursor:pointer;transition:all .1s;-webkit-user-select:none;user-select:none;letter-spacing:1px;box-shadow:0 2px 8px rgba(37,99,235,.06);}
-.key:active{background:rgba(37,99,235,.1);transform:scale(.94);border-color:var(--b1);}
-.key.del{font-size:20px;color:var(--muted);}
-.key.empty{visibility:hidden;}
-.lock-error{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--red);letter-spacing:2px;margin-top:16px;height:16px;}
+.login-title{font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:3px;color:var(--b1);text-transform:uppercase;margin-bottom:3px;text-align:center;text-shadow:0 0 14px var(--b2);}
+.login-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:3px;margin-bottom:30px;}
+.login-form{width:100%;max-width:300px;}
+.login-group{margin-bottom:20px;}
+.login-label{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--b1);text-transform:uppercase;margin-bottom:8px;display:block;}
+.login-input{width:100%;background:var(--surface);border:1.5px solid var(--border2);border-radius:10px;padding:14px;font-family:'Share Tech Mono',monospace;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;letter-spacing:2px;text-transform:uppercase;}
+.login-input:focus{border-color:var(--b1);box-shadow:0 0 0 3px rgba(37,99,235,.1);}
+.login-input::placeholder{color:var(--muted2);}
+.login-btn{width:100%;background:var(--b1);color:#fff;border:none;border-radius:10px;padding:14px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;transition:all .15s;box-shadow:0 0 18px rgba(37,99,235,.28),0 4px 12px rgba(37,99,235,.12);text-transform:uppercase;font-weight:700;}
+.login-btn:active{background:#1d4ed8;transform:scale(.95);}
+.login-error{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--red);letter-spacing:2px;margin-top:16px;height:16px;text-align:center;}
 
 /* APP */
 .app{position:relative;z-index:1;min-height:100vh;}
@@ -214,7 +212,6 @@ header p{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted
 .dl-btn-pdf{background:rgba(239,68,68,.08);color:var(--red);border:1.5px solid #fca5a5;}
 .dl-btn-excel{background:rgba(37,99,235,.08);color:var(--b1);border:1.5px solid var(--border2);}
 .dl-btn-cancel{background:var(--bg);color:var(--muted);border:1px solid var(--border2);font-size:10px;}
-@keyframes scaryPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);opacity:.6;}}
 
 /* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--b1);color:#fff;font-family:'Share Tech Mono',monospace;font-size:12px;padding:10px 24px;border-radius:50px;z-index:999;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;pointer-events:none;white-space:nowrap;letter-spacing:1px;box-shadow:0 0 20px rgba(37,99,235,.3);}
@@ -271,34 +268,19 @@ footer{text-align:center;margin-top:30px;font-family:'Share Tech Mono',monospace
   <div class="intro-tap-hint">APPUYER POUR CONTINUER</div>
 </div>
 
-<!-- LOCK -->
-<div id="lockScreen">
-  <div class="lock-logo">♿</div>
-  <div class="lock-title">SUIVI WCLS SAMSIC APMR</div>
-  <div class="lock-sub">CDG · ACCÈS SÉCURISÉ</div>
-  <div class="pin-display">
-    <div class="pin-char" id="pc0"></div>
-    <div class="pin-char" id="pc1"></div>
-    <div class="pin-char" id="pc2"></div>
-    <div class="pin-char" id="pc3"></div>
-  </div>
-  <div class="keypad">
-    <div class="key" onclick="pressKey('A')">A</div><div class="key" onclick="pressKey('B')">B</div><div class="key" onclick="pressKey('C')">C</div>
-    <div class="key" onclick="pressKey('D')">D</div><div class="key" onclick="pressKey('E')">E</div><div class="key" onclick="pressKey('F')">F</div>
-    <div class="key" onclick="pressKey('M')">M</div><div class="key" onclick="pressKey('P')">P</div><div class="key" onclick="pressKey('R')">R</div>
-    <div class="key empty"></div><div class="key del" onclick="pressKey('⌫')">⌫</div><div class="key empty"></div>
-  </div>
-  <div class="lock-error" id="lockError"></div>
-</div>
-
-<!-- SCARY -->
-<div id="scaryOverlay" style="display:none;position:fixed;inset:0;z-index:200;background:#0a0f1e;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center;">
-  <div style="font-size:64px;margin-bottom:20px;animation:scaryPulse .5s ease-in-out infinite;">⚠️</div>
-  <div style="font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:3px;color:#ef4444;margin-bottom:16px;text-shadow:0 0 20px #ef4444;">ACCÈS NON AUTORISÉ</div>
-  <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#ef4444;letter-spacing:2px;line-height:2.2;margin-bottom:10px;opacity:.85;">TENTATIVE D'INTRUSION DÉTECTÉE<br>ADRESSE IP ENREGISTRÉE<br>SIGNALEMENT EN COURS...<br>RESPONSABLE SÉCURITÉ ALERTÉ</div>
-  <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:#6b7280;letter-spacing:2px;margin-bottom:24px;">ACCÈS BLOQUÉ · RÉESSAI DANS</div>
-  <div id="scaryCountdown" style="font-family:'Share Tech Mono',monospace;font-size:56px;color:#ef4444;text-shadow:0 0 30px #ef4444;font-weight:700;">30</div>
-  <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:#374151;margin-top:30px;letter-spacing:1px;">SAMSIC SECURITY SYSTEM v2.0</div>
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-logo">♿</div>
+  <div class="login-title">SUIVI WCLS SAMSIC APMR</div>
+  <div class="login-sub">CDG · IDENTIFICATION</div>
+  <form class="login-form" onsubmit="return handleLogin(event)">
+    <div class="login-group">
+      <label class="login-label">Nom de l'agent <span style="color:var(--red);">*</span></label>
+      <input type="text" class="login-input" id="loginAgentName" placeholder="Votre nom complet" autocomplete="off" autocorrect="off" spellcheck="false" required>
+    </div>
+    <button type="submit" class="login-btn">CONNEXION</button>
+    <div class="login-error" id="loginError"></div>
+  </form>
 </div>
 
 <!-- APP -->
@@ -306,7 +288,7 @@ footer{text-align:center;margin-top:30px;font-family:'Share Tech Mono',monospace
   <header>
     <div>
       <h1 class="neon-text">♿ SUIVI WCLS</h1>
-      <p>SAMSIC APMR · CDG</p>
+      <p id="headerAgent" style="font-size:10px;margin-top:4px;">Agent: ---</p>
     </div>
     <button class="logout-btn" onclick="logout()" title="Déconnexion">🔒</button>
   </header>
@@ -433,82 +415,27 @@ footer{text-align:center;margin-top:30px;font-family:'Share Tech Mono',monospace
 <div class="toast" id="toast"></div>
 
 <script>
-// LOCK
-const SECRET = 'APMR';
-let pinInput = '', attempts = 0, blocked = false;
+// LOGIN
+let currentAgent = '';
 
-function pressKey(k) {
-  if (blocked) return;
-  if (k === '⌫') { 
-    pinInput = pinInput.slice(0, -1); 
-  } else { 
-    if (pinInput.length >= SECRET.length) return; 
-    pinInput += k; 
+function handleLogin(event) {
+  event.preventDefault();
+  const agentName = document.getElementById('loginAgentName').value.trim();
+  const errorEl = document.getElementById('loginError');
+  
+  if (!agentName || agentName.length < 2) {
+    errorEl.textContent = '⚠ Veuillez entrer un nom valide';
+    return false;
   }
-  updatePinDisplay();
-  if (pinInput.length === SECRET.length) setTimeout(checkCode, 120);
-}
-
-function updatePinDisplay() {
-  for (let i = 0; i < SECRET.length; i++) {
-    const el = document.getElementById('pc' + i);
-    el.textContent = pinInput[i] || '';
-    el.classList.toggle('filled', !!pinInput[i]);
-    el.classList.remove('error');
-  }
-}
-
-function checkCode() {
-  if (pinInput === SECRET) {
-    attempts = 0;
-    document.getElementById('lockScreen').style.display = 'none';
-    document.getElementById('mainApp').style.display = 'block';
-    updateCounter();
-  } else {
-    attempts++;
-    for (let i = 0; i < SECRET.length; i++) {
-      document.getElementById('pc' + i).classList.add('error');
-    }
-    if (attempts >= 3) {
-      blocked = true;
-      showScary();
-    } else {
-      const l = 3 - attempts;
-      document.getElementById('lockError').textContent = '⚠ CODE INCORRECT · ' + l + ' ESSAI' + (l > 1 ? 'S' : '') + ' RESTANT';
-      setTimeout(() => {
-        pinInput = '';
-        updatePinDisplay();
-        document.getElementById('lockError').textContent = '';
-      }, 900);
-    }
-  }
-}
-
-function showScary() {
-  const o = document.getElementById('scaryOverlay');
-  o.style.display = 'flex';
-  let s = 30;
-  document.getElementById('scaryCountdown').textContent = s;
-  const iv = setInterval(() => {
-    s--;
-    document.getElementById('scaryCountdown').textContent = s;
-    if (s <= 0) {
-      clearInterval(iv);
-      o.style.display = 'none';
-      blocked = false;
-      attempts = 0;
-      pinInput = '';
-      updatePinDisplay();
-      document.getElementById('lockError').textContent = '';
-    }
-  }, 1000);
-}
-
-function logout() {
-  pinInput = '';
-  updatePinDisplay();
-  document.getElementById('mainApp').style.display = 'none';
-  document.getElementById('lockScreen').style.display = 'flex';
+  
+  currentAgent = agentName.toUpperCase();
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  document.getElementById('headerAgent').textContent = 'Agent: ' + currentAgent;
+  document.getElementById('agentName').value = currentAgent;
+  updateCounter();
+  errorEl.textContent = '';
+  return false;
 }
 
 // APP STATE
@@ -694,7 +621,7 @@ function confirmReset() {
   
   history = [];
   entryId = 0;
-  document.getElementById('agentName').value = '';
+  document.getElementById('agentName').value = currentAgent;
   document.getElementById('flightNum').value = '';
   document.getElementById('gateNum').value = '';
   document.getElementById('totalWcls').value = 10;
@@ -756,7 +683,7 @@ function showToast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
 }
 
-// INTRO - CORRIGÉ
+// INTRO
 (function() {
   const c = document.getElementById('introCanvas'), ctx = c.getContext('2d');
   
@@ -805,14 +732,14 @@ function triggerLamp() {
   s.classList.add('exiting');
   setTimeout(() => {
     s.style.display = 'none';
-    document.getElementById('lockScreen').style.display = 'flex';
+    document.getElementById('loginScreen').style.display = 'flex';
   }, 700);
 }
 
-// ✅ DÉCLENCHE AUTOMATIQUEMENT APRÈS 3.8s
+// Auto-trigger après 3.8s
 setTimeout(triggerLamp, 3800);
 
-// ✅ ET PERMET LE CLIC/TOUCH MANUEL
+// Click/touch manual trigger
 document.getElementById('lampScreen').addEventListener('click', triggerLamp);
 document.getElementById('lampScreen').addEventListener('touchend', (e) => {
   e.preventDefault();

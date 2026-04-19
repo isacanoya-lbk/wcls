@@ -106,10 +106,11 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 /* APP */
 .app{position:relative;z-index:1;min-height:100vh;}
 header{background:var(--surface);border-bottom:2px solid var(--border2);padding:14px 20px;text-align:center;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 16px rgba(37,99,235,.08);}
-.logout-btn{position:absolute;right:16px;background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px 8px;font-family:'Share Tech Mono',monospace;}
+.logout-btn{position:absolute;right:16px;background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px 8px;font-family:'Share Tech Mono',monospace;transition:all .15s;}
+.logout-btn:hover{color:var(--b1);}
 .logout-btn:active{color:var(--red);}
 header h1{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
-header p{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;margin-top:2px;}
+header p{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-top:4px;}
 .screen{padding:20px 16px 60px;}
 .led-dot{width:8px;height:8px;border-radius:50%;background:var(--b1);box-shadow:0 0 8px var(--b2);animation:blink 1.8s ease-in-out infinite;flex-shrink:0;display:inline-block;margin-right:7px;}
 
@@ -288,7 +289,7 @@ footer{text-align:center;margin-top:30px;font-family:'Share Tech Mono',monospace
   <header>
     <div>
       <h1 class="neon-text">♿ SUIVI WCLS</h1>
-      <p id="headerAgent" style="font-size:10px;margin-top:4px;">Agent: ---</p>
+      <p id="headerAgent">Agent: ---</p>
     </div>
     <button class="logout-btn" onclick="logout()" title="Déconnexion">🔒</button>
   </header>
@@ -613,18 +614,19 @@ function closeMsgModal() {
 }
 
 function confirmReset() {
-  if (!history.length && !document.getElementById('agentName').value) {
+  if (!history.length && document.getElementById('flightNum').value === '' && document.getElementById('gateNum').value === '') {
     showToast('Rien à réinitialiser');
     return;
   }
-  if (!confirm('Réinitialiser toutes les données ?')) return;
+  if (!confirm('Réinitialiser l\'historique ET les champs ?')) return;
   
+  // ✅ EFFACE l'historique ET les champs du formulaire
   history = [];
   entryId = 0;
-  document.getElementById('agentName').value = currentAgent;
   document.getElementById('flightNum').value = '';
   document.getElementById('gateNum').value = '';
   document.getElementById('totalWcls').value = 10;
+  
   updateCounter();
   renderHistory();
   showToast('🔄 Données réinitialisées');
@@ -671,6 +673,35 @@ function downloadExcel() {
   a.download = `wcls-${dateStr.replace(/\//g, '-')}.csv`;
   a.click();
   showToast('📊 Export Excel téléchargé');
+}
+
+// LOGOUT ✅ CORRIGÉ
+function logout() {
+  // ✅ NE PAS effacer l'historique
+  // ✅ Effacer seulement le nom d'agent
+  currentAgent = '';
+  
+  // Effacer les champs du formulaire SAUF l'historique
+  document.getElementById('loginAgentName').value = '';
+  document.getElementById('agentName').value = '';
+  document.getElementById('flightNum').value = '';
+  document.getElementById('gateNum').value = '';
+  document.getElementById('totalWcls').value = 10;
+  document.getElementById('loginError').textContent = '';
+  document.getElementById('headerAgent').textContent = 'Agent: ---';
+  
+  updateCounter();
+  
+  // Afficher l'écran de connexion
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  
+  // Focus sur le champ de connexion
+  setTimeout(() => {
+    document.getElementById('loginAgentName').focus();
+  }, 100);
+  
+  showToast('✓ Déconnecté');
 }
 
 // TOAST
@@ -736,17 +767,13 @@ function triggerLamp() {
   }, 700);
 }
 
-// Auto-trigger après 3.8s
 setTimeout(triggerLamp, 3800);
-
-// Click/touch manual trigger
 document.getElementById('lampScreen').addEventListener('click', triggerLamp);
 document.getElementById('lampScreen').addEventListener('touchend', (e) => {
   e.preventDefault();
   triggerLamp();
 }, {passive: false});
 
-// Auto uppercase
 ['gateNum', 'editGate', 'flightNum', 'editFlight'].forEach(id => {
   const el = document.getElementById(id);
   if (el) {
@@ -756,7 +783,6 @@ document.getElementById('lampScreen').addEventListener('touchend', (e) => {
   }
 });
 
-// Close on overlay click
 document.getElementById('editModal').addEventListener('click', function(e) {
   if (e.target === this) closeEditModal();
 });
